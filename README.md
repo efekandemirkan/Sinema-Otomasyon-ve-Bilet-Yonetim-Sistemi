@@ -6,21 +6,23 @@ Modern sinema salonu işletmeciliği, vizyon takibi, seans yönetimi ve uçtan u
 
 ## 📌 Proje Genel Özeti
 
-Bu sistem; sinema zincirleri, bağımsız salonlar ve izleyiciler arasındaki tüm operasyonel süreci tek bir platformda birleştirmektedir. Proje, sadece temel bir rezervasyon mekanizması sunmakla kalmayıp; 2D, 3D ve IMAX gibi farklı gösterim formatlarını, dinamik bilet fiyatlandırmalarını, özel gün kampanyalarını ve çakışma önleyici akıllı koltuk seçim mekanizmasını bünyesinde barındırır.
+Bu sistem; sinema zincirleri, bağımsız salonlar ve izleyiciler arasındaki tüm operasyonel süreci tek bir platformda birleştirmektedir. Proje, sadece temel bir rezervasyon mekanizması sunmakla kalmayıp; 2D, 3D ve Gold Class gibi farklı gösterim formatlarını, dinamik bilet fiyatlandırmalarını, özel gün kampanyalarını ve çakışma önleyici akıllı koltuk seçim mekanizmasını bünyesinde barındırır.
 
 ---
 
 ## ✨ Temel Özellikler
 
 - **Film & Sanatçı Yönetimi:** Filmlerin tür, oyuncu kadrosu, yönetmen, vizyon tarihi, yaş sınırı ve süre bazında kataloglanması.
-- **Sinema & Salon Altyapısı:** Çoklu sinema şubesi yönetimi, salon tipleri (VIP, Starium, IMAX vb.) ve salona özel dinamik koltuk konfigürasyonu (Normal, İkili, Engelli koltuklar).
-- **Akıllı Seans & Fiyatlandırma Motoru:**
-  - Seans bazlı format (2D/3D/IMAX), dublaj/altyazı dil seçimi.
-  - Tarih, gün tipi (Hafta İçi, Çarşamba vb.) ve seyirci kategorisine (Tam, Öğrenci, Herkes) göre otomatik fiyat eşleştirme.
-  - Özel kural motoru desteği (Örn: Paribu Cineverse Çarşamba Sinema Günü kampanyası).
-- **Güvenli Bilet Satışı ve Koltuk Rezervasyonu:**
-  - Aynı seanstaki aynı koltuğun birden fazla kişiye satılmasını engelleyen veri bütünlüğü koruması (`Filtered Unique Index`).
-  - Bilet durum takibi (Aktif, İptal, İade).
+- **Sinema & Salon Altyapısı:** Çoklu sinema şubesi yönetimi, salon tipleri (2D, 3D, Gold Class) ve salona özel dinamik koltuk konfigürasyonu (Normal, Engelli koltuklar).
+- **Akıllı Seans & Dinamik Fiyatlandırma Motoru:**
+  - Seans bazlı format (2D/3D/Gold Class) ve dublaj/altyazı dil seçimi.
+  - Tarih, gün tipi (Normal, Çarşamba vb.) ve seyirci kategorisine (Tam, Öğrenci, Herkes) göre bilet fiyatlarının dinamik eşleştirilmesi.
+  - Özel kampanya kural motoru desteği (Örn: Paribu Cineverse Çarşamba Sinema Günü sabit fiyat uygulaması).
+- **Güvenli Koltuk Rezervasyonu ve Bilet Satışı (Double Booking Koruması):**
+  - **5 Dakikalık Geçici Kilitleme (Seat Hold):** Kullanıcı koltuğu seçip ödeme adımına geçtiğinde koltuk 5 dakika boyunca o kullanıcı adına rezerve edilir; başka kullanıcıların aynı koltuğu seçmesi engellenir.
+  - **Zaman Aşımı Yönetimi:** 5 dakika içinde ödemesi tamamlanmayan koltuklar otomatik olarak serbest bırakılır ve yeniden satışa açılır.
+  - **Filtered Unique Index:** Veritabanı motoru düzeyinde `(SeansID, KoltukID)` benzersizlik kontrolü uygulanarak aynı koltuğun birden fazla kişiye satılması kesin olarak önlenir.
+  - **Genişletilmiş Durum Takibi:** Biletler `Rezerve`, `Aktif`, `Iptal` ve `Iade` yaşam döngüsüyle izlenir.
 - **Çoklu Sepet & Ödeme Entegrasyonu:** Tek bir ödeme işlemi üzerinden birden fazla bilet satın alabilme desteği (1-to-N ilişki).
 - **Müşteri & Güvenlik:** Müşteri hesapları, güvenli parola hashleme ve işlem geçmişi takibi.
 
